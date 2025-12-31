@@ -436,6 +436,59 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
+        /* Vision & Mission Section */
+        #vision {
+            background: white;
+        }
+
+        #vision .about-content {
+            display: block;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        #vision .why-choose-content {
+            background: var(--soft-cream);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        #vision .why-choose-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        #vision .why-choose-content:last-child {
+            margin-bottom: 0;
+        }
+
+        #vision .why-choose-content h3 {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #vision .why-choose-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-gold);
+        }
+
+        #vision .why-choose-content p {
+            text-align: left;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
         /* Stats Section */
         .stats-grid {
             display: grid;
@@ -752,59 +805,6 @@
 
             .modal-mantra {
                 font-size: 1.2rem;
-            }
-
-            /* Vision & Mission Section */
-            #vision {
-                background: white;
-            }
-            
-            #vision .about-content {
-                display: block;
-                max-width: 1000px;
-                margin: 0 auto;
-            }
-            
-            #vision .why-choose-content {
-                background: var(--soft-cream);
-                padding: 3rem;
-                border-radius: 20px;
-                margin-bottom: 3rem;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-                transition: all 0.3s ease;
-            }
-            
-            #vision .why-choose-content:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-            
-            #vision .why-choose-content:last-child {
-                margin-bottom: 0;
-            }
-            
-            #vision .why-choose-content h3 {
-                position: relative;
-                padding-bottom: 1rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            #vision .why-choose-content h3::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 60px;
-                height: 3px;
-                background: var(--primary-gold);
-            }
-            
-            #vision .why-choose-content p {
-                text-align: left;
-                font-size: 1.05rem;
-                line-height: 1.8;
-                color: var(--text-dark);
-                margin-bottom: 0;
             }
         }
     </style>
