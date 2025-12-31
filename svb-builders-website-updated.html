@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S V B Builders - Building Tomorrow's Communities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #C9A84E;
+            --dark-navy: #1A2332;
+            --soft-cream: #F8F6F1;
+            --accent-teal: #3A5F5F;
+            --light-grey: #E8E6E1;
+            --text-dark: #2C2C2C;
+            --text-light: #6B6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text-dark);
+            background: var(--soft-cream);
+            overflow-x: hidden;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--light-grey);
+        }
+
+        .modal-mantra {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid var(--light-grey);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Work Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 78, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-gold);
+            color: var(--dark-navy);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(201, 168, 78, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: var(--light-grey);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .success-message {
+            background: #4caf50;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-navy);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary-gold);
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            background: var(--soft-cream);
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        .footer-logo img {
+            height: 70px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--accent-teal) 100%);
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="%23ffffff" opacity="0.05"/></svg>');
+            background-size: 50px 50px;
+            animation: movePattern 20s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--primary-gold);
+            color: var(--dark-navy);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s backwards;
+            box-shadow: 0 10px 30px rgba(201, 168, 78, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 168, 78, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--dark-navy);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-gold);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-top: 1.5rem;
+        }
+
+        /* About Section */
+        #about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            background: var(--light-grey);
+            border-radius: 20px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(201, 168, 78, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Services Section */
+        #services {
+            background: var(--soft-cream);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--dark-navy);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--soft-cream);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 300px;
+            background: var(--light-grey);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder {
+            text-align: center;
+            color: var(--text-light);
+            padding: 2rem;
+        }
+
+        .project-info {
+            padding: 2rem;
+        }
+
+        .project-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-navy);
+            margin-bottom: 1rem;
+        }
+
+        .project-info p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Leadership Section */
+        #leadership {
+            background: var(--soft-cream);
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .leader-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .leader-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--dark-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-title {
+            color: var(--primary-gold);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .leader-info p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Why Choose Section */
+        #why-choose {
+            background: white;
+        }
+
+        .why-choose-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .why-choose-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--soft-cream);
+        }
+
+        #contact a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        #contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo span {
+            color: var(--primary-gold);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Fade In Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 4rem 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                padding: 2rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-mantra {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contact Form Modal -->
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-mantra">🕉️ Om Namo Venkatesaya 🕉️</div>
+                <h2 class="modal-title">Welcome to SVB Builders</h2>
+                <p class="modal-subtitle">Please share your details to continue</p>
+            </div>
+            <div id="successMessage" class="success-message">
+                Thank you! Your details have been submitted successfully.
+            </div>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="userName">Full Name *</label>
+                    <input type="text" id="userName" name="userName" required placeholder="Enter your full name">
+                    <div class="error-message" id="nameError">Please enter your name</div>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">Contact Number *</label>
+                    <input type="tel" id="userPhone" name="userPhone" required placeholder="Enter your 10-digit mobile number" pattern="[0-9]{10}" maxlength="10">
+                    <div class="error-message" id="phoneError">Please enter a valid 10-digit mobile number</div>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Submit & Continue</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">S<span>V</span>B <span>BUILDERS</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Building Tomorrow's Communities</h1>
+            <p>Crafting exceptional residential and commercial spaces with integrity, innovation, and a commitment to excellence</p>
+            <a href="#about" class="cta-button">Explore Our Vision</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header fade-in">
+            <h2>About SVB Builders</h2>
+            <p>Excellence in every development, trust in every transaction</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <h3>Who We Are</h3>
+                <p>S V B Builders is a reputed name in the real estate sector, specializing in the development of residential plots and comprehensive land solutions. Based in Bengaluru, Karnataka, we focus on providing well-planned layouts, clear titles, and premium locations that offer excellent appreciation potential.</p>
+                <p>Our projects are crafted with attention to detail, ensuring quality infrastructure, legal compliance, and long-term value for our customers. Whether you are looking for a residential plot to build your dream home or seeking a secure land investment, S V B Builders brings experience, trust, and commitment to every project.</p>
+                <p>We pride ourselves on transparency in dealings, ethical practices, and a customer-first approach that has earned us a strong reputation among buyers and investors alike.</p>
+            </div>
+            <div class="about-image fade-in">
+                <img src="images/Company logo.jpeg" alt="SVB Builders" style="width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 2rem;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-header fade-in">
+            <h2>Our Services</h2>
+            <p>Comprehensive real estate solutions designed to meet diverse needs</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">🏘️</div>
+                <h3>Residential Plot Development</h3>
+                <p>We specialize in developing well-planned residential layouts with clear titles, premium amenities, and strategic locations. Our projects are designed to provide customers with not just plots of land, but an opportunity to build their dream homes in thriving communities.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🏙️</div>
+                <h3>Integrated Townships</h3>
+                <p>Our vision extends beyond individual plots to creating thoughtfully designed townships that combine residential, commercial, and recreational spaces. These integrated communities are crafted to promote convenience, connectivity, and a superior lifestyle.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">📈</div>
+                <h3>Land Investment & Advisory</h3>
+                <p>With deep expertise in the real estate sector, we assist investors in identifying high-growth locations and secure land investments. Our advisory services ensure clients make informed decisions with maximum returns and minimal risk.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">🔑</div>
+                <h3>Property Management</h3>
+                <p>We offer end-to-end marketing and property management services, ensuring that our clients receive complete support even after project handover. From promotion and sales to long-term property care, we provide professional solutions that add convenience and value.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="section-header fade-in">
+            <h2>Our Projects</h2>
+            <p>Landmark developments that define excellence in real estate</p>
+        </div>
+        <div class="projects-grid">
+            <!-- PROJECT CARD 1 -->
+            <div class="project-card fade-in" data-project="farmland">
+                <div class="project-image">
+                    <img src="/images/farmland.jpg" alt="Farmland Project" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <h3>FARMLAND PROJECTS</h3>
+                    <p>Add your project description here. Describe the location, features, amenities, and what makes this project special.</p>
+                </div>
+            </div>
+
+            <!-- PROJECT CARD 2 -->
+            <div class="project-card fade-in" data-project="residential">
+                <div class="project-image">
+                    <img src="/images/residential.jpg" alt="Residential Project" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <h3>RESIDENTIAL PROJECTS</h3>
+                    <p>Add your project description here. Describe the location, features, amenities, and what makes this project special.</p>
+                </div>
+            </div>
+
+            <!-- PROJECT CARD 3 -->
+            <div class="project-card fade-in" data-project="apartment">
+                <div class="project-image">
+                    <img src="/images/apartments.jpg" alt="Apartments Project" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <h3>APARTMENT PROJECTS</h3>
+                    <p>Add your project description here. Describe the location, features, amenities, and what makes this project special.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership">
+        <div class="section-header fade-in">
+            <h2>Our Leadership Team</h2>
+            <p>Visionary leaders driving excellence and innovation</p>
+        </div>
+        <div class="leadership-grid">
+            <div class="leader-card fade-in">
+                <div class="leader-info">
+                    <h3>Smt. Putta Indira</h3>
+                    <div class="leader-title">Chair Person</div>
+                    <p>A visionary leader and the guiding force behind S V B Builders, she ensures that the company adheres to its core values while pursuing sustainable growth. Her strong focus on ethical practices has been instrumental in shaping the company's long-term vision.</p>
+                </div>
+            </div>
+
+            <div class="leader-card fade-in">
+                <div class="leader-info">
+                    <h3>Sri. Putta Krishna Babu</h3>
+                    <div class="leader-title">Vice Chairman</div>
+                    <p>He plays a key role in defining growth strategies, fostering strategic partnerships, and identifying emerging opportunities in the real estate sector. His deep understanding of market dynamics ensures the company remains agile and forward-thinking.</p>
+                </div>
+            </div>
+
+            <div class="leader-card fade-in">
+                <div class="leader-info">
+                    <h3>Mr. Putta Deepak Kumar</h3>
+                    <div class="leader-title">Managing Director</div>
+                    <p>With over two decades of experience in real estate, particularly in North Bangalore projects, he oversees project execution, operational strategy, and business expansion. Known for meticulous attention to detail and commitment to quality.</p>
+                </div>
+            </div>
+
+            <div class="leader-card fade-in">
+                <div class="leader-info">
+                    <h3>Mr. Shashi Kiran</h3>
+                    <div class="leader-title">General Manager</div>
+                    <p>Leading administration, operations, and marketing functions, ensuring smooth organizational processes and efficient project execution. His expertise spans business operations, team coordination, and strategic marketing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-choose">
+        <div class="section-header fade-in">
+            <h2>Why Choose Us</h2>
+        </div>
+        <div class="why-choose-content fade-in">
+            <p>Choosing the right real estate partner is about more than just buying land or property — it's about placing your trust in a company that understands your aspirations and protects your interests. At S V B Builders, we don't just sell plots or develop projects; we create long-lasting experiences that bring confidence, peace of mind, and satisfaction to every client.</p>
+            
+            <p>What makes us unique is our ability to combine foresight with execution. We look beyond today's opportunities to identify tomorrow's growth corridors, ensuring that every project is future-ready and strategically positioned. Our clients choose us because we bring a rare balance of tradition and modernity — honoring values of trust while embracing innovation and new-age practices.</p>
+            
+            <p>Unlike many developers, we view every transaction as a long-term relationship rather than a one-time deal. This philosophy allows us to serve not just as a developer but as a trusted advisor, guiding clients at every step of their real estate journey.</p>
+            
+            <p>Above all, our strength lies in consistency — consistency in our commitments, in our delivery, and in the confidence we inspire. When you choose S V B Builders, you're choosing a partner who stands by you today, tomorrow, and for generations to come.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header fade-in">
+            <h2>Get In Touch</h2>
+            <p>Let's discuss how we can help you find your perfect property</p>
+        </div>
+        <div class="why-choose-content fade-in" style="text-align: center;">
+            <p style="font-size: 1.4rem;"><strong>📧 Email:</strong> <a href="mailto:admin@svbbuilderz.in" style="font-size: 1.4rem;">admin@svbbuilderz.in</a></p>
+            <p style="font-size: 1.4rem;"><strong>📱 Phone:</strong> +91 63633 07062</p>
+            <p style="font-size: 1.4rem;"><strong>📍 Address:</strong> #######</p>
+
+            <!-- Social Media with Text -->
+            <p style="font-size: 1.6rem; margin-top: 2rem; margin-bottom: 1rem;"><strong>Follow Us</strong></p>
+            <p style="font-size: 1.4rem;">
+                <i class="fab fa-facebook" style="color: #1877f2; font-size: 2rem; margin-right: 0.5rem;"></i>
+                <strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=61583131618739" target="_blank" style="font-size: 1.4rem;">S V B Builderz</a>
+            </p>
+            <p style="font-size: 1.4rem;">
+                <i class="fab fa-instagram" style="color: #E4405F; font-size: 2rem; margin-right: 0.5rem;"></i>
+                <strong>Instagram:</strong> <a href="https://www.instagram.com/svbbuilderz/" target="_blank" style="font-size: 1.4rem;">@svbbuilders</a>
+            </p>
+
+            <br>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">S<span>V</span>B <span>BUILDERS</span></div>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#leadership">Leadership</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 S V B Builders. All rights reserved. | Building Tomorrow's Communities</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Configuration - REPLACE WITH YOUR GOOGLE SHEETS WEB APP URL
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzQ0FJsF2LvOp2b8kwUyKl6lsw5l8oMFFOZxJG7Vt1W43ByC6NDNK2ee3R6swfXZm5o/exec';
+        
+        // Modal and form elements
+        const modal = document.getElementById('contactModal');
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Track if user has submitted initial form
+        let hasSubmittedInitial = localStorage.getItem('svb_initial_submitted') === 'true';
+        
+        // Show modal on page load if not submitted
+        window.addEventListener('load', () => {
+            if (!hasSubmittedInitial) {
+                setTimeout(() => {
+                    modal.classList.add('active');
+                }, 500);
+            }
+        });
+
+        // Form submission handler
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value.trim();
+            const phone = document.getElementById('userPhone').value.trim();
+            
+            // Validation
+            let isValid = true;
+            
+            if (!name) {
+                showError('nameError');
+                isValid = false;
+            } else {
+                hideError('nameError');
+            }
+            
+            if (!phone || phone.length !== 10 || !/^[0-9]{10}$/.test(phone)) {
+                showError('phoneError');
+                isValid = false;
+            } else {
+                hideError('phoneError');
+            }
+            
+            if (!isValid) return;
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                // Send data to Google Sheets
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        phone: phone,
+                        timestamp: new Date().toISOString(),
+                        source: window.currentProjectType || 'Homepage'
+                    })
+                });
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                form.style.display = 'none';
+                
+                // Mark as submitted
+                localStorage.setItem('svb_initial_submitted', 'true');
+                hasSubmittedInitial = true;
+                
+                // Close modal and redirect if project click
+                setTimeout(() => {
+                    modal.classList.remove('active');
+                    successMessage.style.display = 'none';
+                    form.style.display = 'block';
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit & Continue';
+                    
+                    // If project redirect is pending
+                    if (window.pendingProjectRedirect) {
+                        window.location.href = window.pendingProjectRedirect;
+                    }
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('There was an error submitting your details. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit & Continue';
+            }
+        });
+
+        // Project card click handlers
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const projectType = card.getAttribute('data-project');
+                window.currentProjectType = projectType.toUpperCase() + ' PROJECT';
+                
+                // If user hasn't submitted form, show modal
+                if (!hasSubmittedInitial) {
+                    modal.classList.add('active');
+                    // Store the redirect URL for after form submission
+                    window.pendingProjectRedirect = `project-coming-soon.html?type=${projectType}`;
+                } else {
+                    // User has already submitted, allow navigation to coming soon page
+                    window.location.href = `project-coming-soon.html?type=${projectType}`;
+                }
+            });
+        });
+
+        // Error message functions
+        function showError(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+        
+        function hideError(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Header shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

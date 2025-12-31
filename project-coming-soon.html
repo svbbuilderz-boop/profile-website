@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Coming Soon - S V B Builders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #C9A84E;
+            --dark-navy: #1A2332;
+            --soft-cream: #F8F6F1;
+            --accent-teal: #3A5F5F;
+            --light-grey: #E8E6E1;
+            --text-dark: #2C2C2C;
+            --text-light: #6B6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--accent-teal) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-navy);
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* Main Content */
+        .coming-soon-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coming-soon-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="%23ffffff" opacity="0.05"/></svg>');
+            background-size: 50px 50px;
+            animation: movePattern 20s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 4rem 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mantra {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .project-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--dark-navy);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .project-type {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .coming-soon-text {
+            font-size: 1.8rem;
+            color: var(--accent-teal);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .notify-section {
+            background: var(--soft-cream);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .notify-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-navy);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .notify-section p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .contact-item a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-teal);
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: var(--primary-gold);
+            color: var(--dark-navy);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(201, 168, 78, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 168, 78, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 35, 50, 0.95);
+            color: white;
+            padding: 2rem 4rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--primary-gold);
+        }
+
+        .footer-bottom {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .content-wrapper {
+                padding: 3rem 2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-type {
+                font-size: 1.2rem;
+            }
+
+            .coming-soon-text {
+                font-size: 1.4rem;
+            }
+
+            .project-icon {
+                font-size: 4rem;
+            }
+
+            .mantra {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="svb-builders-website-updated.html" class="logo">S<span>V</span>B <span>BUILDERS</span></a>
+            <ul class="nav-links">
+                <li><a href="svb-builders-website-updated.html#about">About</a></li>
+                <li><a href="svb-builders-website-updated.html#services">Services</a></li>
+                <li><a href="svb-builders-website-updated.html#projects">Projects</a></li>
+                <li><a href="svb-builders-website-updated.html#leadership">Leadership</a></li>
+                <li><a href="svb-builders-website-updated.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="coming-soon-container">
+        <div class="content-wrapper">
+            <div class="mantra">🕉️ Om Namo Venkatesaya 🕉️</div>
+            
+            <div class="project-icon" id="projectIcon">🏘️</div>
+            
+            <div class="project-type" id="projectType">FARMLAND PROJECTS</div>
+            
+            <h1>Exciting Projects</h1>
+            <div class="coming-soon-text">Coming Soon...</div>
+            
+            <p class="description">
+                We are working on bringing you exceptional <span id="projectName">farmland</span> opportunities 
+                that reflect our commitment to quality, transparency, and customer satisfaction. 
+                Stay tuned for detailed information about locations, amenities, and booking details.
+            </p>
+
+            <div class="notify-section">
+                <h3>Get Notified When We Launch</h3>
+                <p>Contact us to be among the first to know when our new projects become available.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        📧 <a href="mailto:admin@svbbuilderz.in">admin@svbbuilderz.in</a>
+                    </div>
+                    <div class="contact-item">
+                        📱 <a href="tel:+916363307062">+91 63633 07062</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="svb-builders-website-updated.html#projects" class="back-button">← Back to All Projects</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">S<span>V</span>B <span>BUILDERS</span></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 S V B Builders. All rights reserved. | Building Tomorrow's Communities</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get project type from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectType = urlParams.get('type') || 'farmland';
+
+        // Project configurations
+        const projectConfigs = {
+            farmland: {
+                icon: '🌾',
+                name: 'Farmland Projects',
+                description: 'farmland'
+            },
+            residential: {
+                icon: '🏘️',
+                name: 'Residential Projects',
+                description: 'residential plot'
+            },
+            apartment: {
+                icon: '🏢',
+                name: 'Apartment Projects',
+                description: 'apartment'
+            }
+        };
+
+        // Update page content based on project type
+        const config = projectConfigs[projectType] || projectConfigs.farmland;
+        document.getElementById('projectIcon').textContent = config.icon;
+        document.getElementById('projectType').textContent = config.name.toUpperCase();
+        document.getElementById('projectName').textContent = config.description;
+        document.title = `${config.name} Coming Soon - S V B Builders`;
+    </script>
+</body>
+</html>
