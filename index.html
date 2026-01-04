@@ -868,7 +868,7 @@
         <div class="hero-content">
             <h1>Building Tomorrow's Communities</h1>
             <p>Crafting exceptional residential and commercial spaces with integrity, innovation, and a commitment to excellence</p>
-            <a href="#about" class="cta-button">Get To Know Us</a>
+            <a href="#about" class="cta-button">Explore Our Vision</a>
         </div>
     </section>
 
@@ -1080,6 +1080,13 @@
         </div>
     </footer>
 
+    <!-- Audio element for modal popup -->
+    <audio id="modalAudio" preload="auto">
+        <source src="audio/welcome.mpeg" type="audio/mpeg">
+        <source src="audio/welcome.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- JavaScript -->
     <script>
         // Configuration - REPLACE WITH YOUR GOOGLE SHEETS WEB APP URL
@@ -1099,6 +1106,16 @@
             if (!hasSubmittedInitial) {
                 setTimeout(() => {
                     modal.classList.add('active');
+                    
+                    // Play audio when modal opens
+                    const audio = document.getElementById('modalAudio');
+                    if (audio) {
+                        audio.volume = 0.6; // Set volume to 60% (adjust as needed: 0.0 to 1.0)
+                        audio.play().catch(error => {
+                            console.log('Audio autoplay prevented by browser:', error);
+                            // This is normal - browsers block autoplay with sound until user interacts with page
+                        });
+                    }
                 }, 500);
             }
         });
@@ -1189,6 +1206,17 @@
                 // If user hasn't submitted form, show modal
                 if (!hasSubmittedInitial) {
                     modal.classList.add('active');
+                    
+                    // Play audio when modal opens via project click
+                    const audio = document.getElementById('modalAudio');
+                    if (audio) {
+                        audio.volume = 0.6; // Set volume to 60%
+                        audio.currentTime = 0; // Reset audio to beginning
+                        audio.play().catch(error => {
+                            console.log('Audio playback prevented:', error);
+                        });
+                    }
+                    
                     // Store the redirect URL for after form submission
                     window.pendingProjectRedirect = `project-coming-soon.html?type=${projectType}`;
                 } else {
