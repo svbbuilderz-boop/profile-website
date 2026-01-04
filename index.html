@@ -709,19 +709,26 @@
             background: var(--dark-navy);
             color: white;
             padding: 3rem 4rem;
-            text-align: center;
         }
 
         .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 1400px;
             margin: 0 auto;
+            margin-bottom: 2rem;
+        }
+
+        .logo-image {
+            height: 60px;
+            width: auto;
         }
 
         .footer-logo {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 2rem;
         }
 
         .footer-logo span {
@@ -730,9 +737,7 @@
 
         .footer-links {
             display: flex;
-            justify-content: center;
             gap: 2rem;
-            margin-bottom: 2rem;
             flex-wrap: wrap;
         }
 
@@ -740,6 +745,7 @@
             color: white;
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 1rem;
         }
 
         .footer-links a:hover {
@@ -750,6 +756,12 @@
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
         }
 
         /* Fade In Animation */
@@ -840,7 +852,7 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">S<span>V</span>B <span>BUILDERS</span></div>
+            <div class="logo"><img src="images/Company logo.jpeg" alt="S V B Builders" class="logo-image"></div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
@@ -1054,7 +1066,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">S<span>V</span>B <span>BUILDERS</span></div>
+            <div class="logo"><img src="images/Company logo.jpeg" alt="S V B Builders" class="logo-image"></div>
             <div class="footer-links">
                 <a href="#about">About</a>
                 <a href="#services">Services</a>
@@ -1062,9 +1074,9 @@
                 <a href="#leadership">Leadership</a>
                 <a href="#contact">Contact</a>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 S V B Builders. All rights reserved. | Building Tomorrow's Communities</p>
-            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 S V B Builders. All rights reserved. | Building Tomorrow's Communities</p>
         </div>
     </footer>
 
